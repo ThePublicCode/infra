@@ -3,9 +3,9 @@ name: Terraform
 on:
   push:
     branches: [main]
-    paths: [terraform/**]
+    paths: [terraform/**, .github/workflows/terraform.yml]
   pull_request:
-    paths: [terraform/**]
+    paths: [terraform/**, .github/workflows/terraform.yml]
   workflow_dispatch:
 
 permissions:
