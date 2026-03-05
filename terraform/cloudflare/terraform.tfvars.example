@@ -1,3 +1,8 @@
+# Cloudflare DNS
 cloudflare_api_token              = "your-cloudflare-api-token"
 cloudflare_zone_id                = "your-cloudflare-zone-id"
 github_pages_verification_code    = "your-verification-code"
+
+# R2 backend (set as GitHub secrets, not here)
+# R2_ACCESS_KEY_ID      → AWS_ACCESS_KEY_ID
+# R2_SECRET_ACCESS_KEY  → AWS_SECRET_ACCESS_KEY
