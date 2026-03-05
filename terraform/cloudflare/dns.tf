@@ -37,12 +37,3 @@ resource "cloudflare_record" "staging" {
   proxied = true # must be proxied for transform rules
   ttl     = 1    # auto
 }
-
-# Domain verification TXT record
-resource "cloudflare_record" "github_pages_verification" {
-  zone_id = var.cloudflare_zone_id
-  name    = "_github-pages-challenge-ThePublicCode"
-  content = var.github_pages_verification_code
-  type    = "TXT"
-  ttl     = 1 # auto
-}

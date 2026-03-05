@@ -15,8 +15,3 @@ variable "domain" {
   type        = string
   default     = "thepubliccode.org"
 }
-
-variable "github_pages_verification_code" {
-  description = "GitHub Pages domain verification TXT value"
-  type        = string
-}
