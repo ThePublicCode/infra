@@ -34,7 +34,9 @@ jobs:
 
       - name: Init
         working-directory: ${{ env.TF_DIR }}
-        run: terraform init
+        env:
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+        run: terraform init -backend-config="endpoints={s3=\"$R2_ENDPOINT\"}"
 
       - name: Plan
         id: plan
@@ -89,7 +91,9 @@ jobs:
 
       - name: Init
         working-directory: ${{ env.TF_DIR }}
-        run: terraform init
+        env:
+          R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+        run: terraform init -backend-config="endpoints={s3=\"$R2_ENDPOINT\"}"
 
       - uses: actions/download-artifact@v4
         with:
