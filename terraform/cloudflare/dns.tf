@@ -28,6 +28,16 @@ resource "cloudflare_record" "www" {
   ttl     = 1 # auto
 }
 
+# staging CNAME → GitHub Pages
+resource "cloudflare_record" "staging" {
+  zone_id = var.cloudflare_zone_id
+  name    = "staging"
+  content = "thepubliccode.github.io"
+  type    = "CNAME"
+  proxied = true # must be proxied for transform rules
+  ttl     = 1    # auto
+}
+
 # Domain verification TXT record
 resource "cloudflare_record" "github_pages_verification" {
   zone_id = var.cloudflare_zone_id

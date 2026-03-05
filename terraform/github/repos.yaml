@@ -1,0 +1,18 @@
+The-Public-Code.github.io:
+  description: "The Public Code - connecting nonprofits with volunteer engineers"
+  visibility: public
+  homepage_url: "https://thepubliccode.org"
+  github_pages:
+    build_type: workflow
+    custom_domain: thepubliccode.org
+  environments:
+    staging: {}
+    production:
+      reviewers: true
+
+infra:
+  description: "Infrastructure as code for ThePublicCode"
+  visibility: public
+  environments:
+    production:
+      reviewers: true
