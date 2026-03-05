@@ -110,7 +110,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
-          name: tfplan-${{ hashFiles(format('{0}/**', matrix.dir)) }}
+          name: tfplan-${{ matrix.dir == 'terraform/cloudflare' && 'cloudflare' || 'github' }}
           path: ${{ matrix.dir }}/tfplan
 
   apply:
@@ -143,7 +143,7 @@ jobs:
 
       - uses: actions/download-artifact@v4
         with:
-          name: tfplan-${{ hashFiles(format('{0}/**', matrix.dir)) }}
+          name: tfplan-${{ matrix.dir == 'terraform/cloudflare' && 'cloudflare' || 'github' }}
           path: ${{ matrix.dir }}
 
       - name: Apply
