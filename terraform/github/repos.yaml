@@ -5,6 +5,7 @@ The-Public-Code.github.io:
   github_pages:
     build_type: workflow
     custom_domain: thepubliccode.org
+    https_enforced: true
   environments:
     staging: {}
     production:

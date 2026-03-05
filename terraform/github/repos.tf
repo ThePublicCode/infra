@@ -50,6 +50,37 @@ resource "github_repository" "this" {
   }
 }
 
+# Enforce HTTPS on Pages sites with custom domains
+locals {
+  pages_https = {
+    for repo_name, repo in local.repos :
+    repo_name => repo
+    if try(repo.github_pages.https_enforced, false) && try(repo.github_pages.custom_domain, null) != null
+  }
+}
+
+resource "terraform_data" "pages_https_enforcement" {
+  for_each = local.pages_https
+
+  input = each.key
+
+  provisioner "local-exec" {
+    command = <<-EOT
+      gh api repos/${var.github_owner}/${each.key}/pages \
+        -X PUT \
+        --input - <<'JSON'
+      {"https_enforced":true,"cname":"${each.value.github_pages.custom_domain}","build_type":"${try(each.value.github_pages.build_type, "workflow")}","source":{"branch":"main","path":"/"}}
+      JSON
+    EOT
+
+    environment = {
+      GH_TOKEN = var.github_token
+    }
+  }
+
+  depends_on = [github_repository.this]
+}
+
 # Environments
 resource "github_repository_environment" "this" {
   for_each = local.environments
